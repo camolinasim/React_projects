@@ -10,11 +10,17 @@ class App extends Component {
       {name: 'crust', age: 23}
     ]
   }
+
+  switchNameHandler = () => {
+    console.log('Button was clicked!')
+  } //handler means this is a method you're not actively calling
+
+
   render() {
     return (
       <div className="App">
         <h1>I am a React app</h1>
-        <button>Switch Name</button>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My hobbies: racing </Person>
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/> 
