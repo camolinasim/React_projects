@@ -8,11 +8,20 @@ class App extends Component {
       {name: 'cris', age: 24},
       {name: 'crost', age: 22},
       {name: 'crust', age: 23}
-    ]
+    ],
+    otherState: 'some other value'
   }
 
   switchNameHandler = () => {
-    console.log('Button was clicked!')
+   // console.log('Button was clicked!')
+   //DONT DO THIS: this.state.persons[0].name = 'potato'
+   this.setState({
+    persons: [
+      {name: 'cristian', age: 24},
+      {name: 'crost', age: 22},
+      {name: 'crust', age: 27}
+    ]
+   })
   } //handler means this is a method you're not actively calling
 
 
