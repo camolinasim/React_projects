@@ -1,10 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/prop-types */
 import React from "react";
+
+import "./Person.css";
+
 //we can output dynamic content as part of our JSX content
 const person = (props) => {
   return (
-    <div>
+    <div className="Person">
       <p onClick={props.click}>
         I'm {props.name} and I am {props.age} years old!
       </p>
