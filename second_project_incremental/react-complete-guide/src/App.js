@@ -1,4 +1,3 @@
-/* eslint-disable parsing-error */
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
@@ -11,39 +10,36 @@ class App extends Component {
       { name: "Stephanie", age: 26 },
     ],
     otherState: "some other value",
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
-    // console.log('Button was clicked!')
-    //DONT DO THIS: this.state.persons[0].name = 'potato'
+    // console.log('Was clicked!');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
     this.setState({
       persons: [
-        { name: newName, age: 1 },
-        { name: "manu", age: 2 },
-        { name: "stephanie", age: 3 },
+        { name: newName, age: 28 },
+        { name: "Manu", age: 29 },
+        { name: "Stephanie", age: 27 },
       ],
-      showPersons: false,
     });
-  }; // handler means this is a method you're not actively calling
+  };
 
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
-        { name: "max", age: 10 },
-        { name: event.target.value, age: 20 },
-        { name: "stephanie", age: 30 },
+        { name: "Max", age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: "Stephanie", age: 26 },
       ],
     });
   };
 
-  nameChangedHandler = () => {
+  togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   };
-  //There are two different ways of styling: You can add styles
-  //locally with the style variable and pass it to the html tag
-  //you want that style to go to,
-  //or you can go to App.css and add global styles from there
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -53,39 +49,41 @@ class App extends Component {
       cursor: "pointer",
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, "Mewtwo!")}
+            changed={this.nameChangedHandler}
+          >
+            My Hobbies: Racing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
-        <h1>I am a React app</h1>
-        <button style={style} onClick={this.nameChangedHandler}>
+        <h1>Hi, I'm a React App</h1>
+        <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
-
-        {this.state.showPersons ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              click={this.switchNameHandler.bind(this, "Maximilian!!")}
-            />
-
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, "Max!")}
-              changed={this.nameChangedHandler}
-            >
-              My hobbies: racing{" "}
-            </Person>
-
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              click={this.switchNameHandler.bind(this, "third")}
-            />
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
