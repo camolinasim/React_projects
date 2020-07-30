@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
+//IF YOU'RE SEEING THIS, I'IN THE BATHROOM
 class App extends Component {
   state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Stephanie", age: 26 },
+      { name: "Charmander", age: 5 },
+      { name: "Squirtle", age: 5 },
+      { name: "Bolbasaur", age: 5 },
     ],
     otherState: "some other value",
     showPersons: false,
@@ -54,22 +55,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "Mewtwo!")}
-            changed={this.nameChangedHandler}
-          >
-            My Hobbies: Racing
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          />
+          {this.state.persons.map((person) => {
+            return <Person name={person.name} age={person.age} />;
+          })}
         </div>
       );
     }
