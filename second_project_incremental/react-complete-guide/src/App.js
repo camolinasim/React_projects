@@ -22,6 +22,7 @@ class App extends Component {
         { name: "manu", age: 2 },
         { name: "stephanie", age: 3 },
       ],
+      showPersons: false,
     });
   }; // handler means this is a method you're not actively calling
 
@@ -34,6 +35,15 @@ class App extends Component {
       ],
     });
   };
+
+  nameChangedHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  };
+  //There are two different ways of styling: You can add styles
+  //locally with the style variable and pass it to the html tag
+  //you want that style to go to,
+  //or you can go to App.css and add global styles from there
   render() {
     const style = {
       backgroundColor: "white",
@@ -46,32 +56,34 @@ class App extends Component {
     return (
       <div className="App">
         <h1>I am a React app</h1>
-        <button
-          style={style}
-          onClick={this.switchNameHandler.bind(this, "button")}
-        >
-          Switch Name
+        <button style={style} onClick={this.nameChangedHandler}>
+          Toggle Persons
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, "Maximilian!!")}
-        />
 
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Max!")}
-          changed={this.nameChangedHandler}
-        >
-          My hobbies: racing{" "}
-        </Person>
+        {this.state.showPersons ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              click={this.switchNameHandler.bind(this, "Maximilian!!")}
+            />
 
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          click={this.switchNameHandler.bind(this, "third")}
-        />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, "Max!")}
+              changed={this.nameChangedHandler}
+            >
+              My hobbies: racing{" "}
+            </Person>
+
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+              click={this.switchNameHandler.bind(this, "third")}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }
